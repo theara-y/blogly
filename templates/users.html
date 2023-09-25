@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Users{% endblock %}
+
+{% block body %}
+<div class="d-flex mb-3">
+    <h1 class="d-inline">Users</h1>
+    <form action="/users/new" method = "GET" class="d-flex">
+        <button class="btn btn-primary mx-4">Add User</button>
+    </form>
+</div>
+<div class="list-group">
+    {% for user in users %}
+    <a href="/users/{{user.id}}" class="list-group-item list-group-item-action mb-1">{{user.first_name}} {{user.last_name}}</a>
+    {% endfor %}
+</div>
+{% endblock %}

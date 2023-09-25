@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="container vw-50 text-center">
+    <div class="flex-shrink-0">
+        <img src="{{user.image_url}}" alt="">
+    </div>
+    <div class="h1 flex-grow-1 ms-3">
+        {{user.first_name}} {{user.last_name}}
+    </div>
+    <form class="mb-3" action="/users/{{user.id}}/edit">
+        <button class="btn btn-success">Edit</button>
+    </form>
+    <form class="mx-3" action="/users/{{user.id}}/delete" method="POST">
+        <button class="btn btn-danger">Delete</button>
+    </form>
+</div>
+{% endblock %}
