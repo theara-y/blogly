@@ -1,22 +1,34 @@
 {% extends 'base.html' %}
 
 {% block body %}
-<h1>Create a user</h1>
-<form action="/users/new" method="POST">
-    <div class="form-floating mb-3">
-        <input type="text" class="form-control" id="first_name" name="first_name" placeholder="first_name">
-        <label for="first_name">First Name</label>
+<div class="container">
+    <div class="row text-center">
+        <h1 class="h1">Create a user</h1>
     </div>
-    <div class="form-floating mb-3">
-        <input type="text" class="form-control" id="last_name" name="last_name" placeholder="last_name">
-        <label for="last_name">Last Name</label>
-    </div>
-    <div class="form-floating mb-3">
-        <input type="text" class="form-control" id="image_url" name="image_url" placeholder="image_url">
-        <label for="image_url">Image URL</label>
-    </div>
-    <div class="d-flex justify-content-right">
-        <button class="btn btn-success w-100">Add</button>
-    </div>
-</form>
+    <form class="row" action="/users/new" method="POST">
+        <div class="row py-3">
+            <label class="col-sm-2 col-form-label" for="first_name">First Name</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="first_name" name="first_name" placeholder="first_name">
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label class="col-sm-2 col-form-label" for="last_name">Last Name</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="last_name" name="last_name" placeholder="last_name">
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label class="col-sm-2 col-form-label" for="image_url">Image URL</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="image_url" name="image_url" placeholder="image_url">
+            </div>
+        </div>
+        <div class="row mb-3 text-center">
+            <div class="col-sm-10 offset-sm-2">
+                <button class="btn btn-success w-100">Add</button>
+            </div>
+        </div>
+    </form>
+</div>
 {% endblock %}

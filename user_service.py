@@ -1,6 +1,7 @@
 from models import db, User
 from sqlalchemy import exc
 
+
 class UserService:
     def get_users(self):
         return User.query.all()
@@ -8,12 +9,12 @@ class UserService:
     def get_user(self, id):
         return User.query.get(id)
 
-    def create_user(self, first_name, last_name, image_url = ''):
+    def create_user(self, first_name, last_name, image_url=''):
         if first_name != '' and last_name != '':
             user = User(
-                first_name = first_name, 
-                last_name = last_name, 
-                image_url = image_url
+                first_name=first_name,
+                last_name=last_name,
+                image_url=image_url
             )
             try:
                 db.session.add(user)
@@ -21,7 +22,7 @@ class UserService:
             except exc.IntegrityError:
                 db.session.rollback()
 
-    def update_user(self, user_id, first_name, last_name, image_url = ''):
+    def update_user(self, user_id, first_name, last_name, image_url=''):
         if first_name != '' and last_name != '':
             user = self.get_user(user_id)
             if user:
@@ -34,5 +35,6 @@ class UserService:
                 db.session.rollback()
 
     def delete_user(self, id):
-        User.query.filter_by(id = id).delete()
+        user = db.session.query(User).filter(User.id == id).first()
+        db.session.delete(user)
         db.session.commit()

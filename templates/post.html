@@ -1,18 +1,14 @@
 {% extends 'base.html' %}
 
-{% block css %}
-<link rel="stylesheet" type="text/css" href="/static/app.css">
-{% endblock %}
-
 {% block body %}
 <div class="container">
     <div class="row justify-content-start">
         <div class="col-3">
-            <img class="img-fluid img-thumbnail" src="{{user.image_url}}" alt="">
+            <img class="img-fluid img-thumbnail" src="{{post.user.image_url}}" alt="">
         </div>
         <div class="col-9">
             <div class="row">
-                <div class="col-auto me-auto h1">{{user.first_name}} {{user.last_name}}</div>
+                <div class="col-auto me-auto h1">{{post.title}}</div>
                 <div class="col-auto dropdown">
                     <button class="btn btn-outline-light text-dark rounded-0" type="button" data-bs-toggle="dropdown"
                         aria-expanded="false">
@@ -24,12 +20,12 @@
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end p-0">
                         <li>
-                            <form class="dropdown-item p-0" action="/users/{{user.id}}/edit">
+                            <form class="dropdown-item p-0" action="/posts/{{post.id}}/edit">
                                 <button class="w-100 btn btn-outline-light text-dark rounded-0">Edit</button>
                             </form>
                         </li>
                         <li>
-                            <form class="dropdown-item p-0" action="/users/{{user.id}}/delete" method="POST">
+                            <form class="dropdown-item p-0" action="/posts/{{post.id}}/delete" method="POST">
                                 <button class="w-100 btn btn-outline-danger rounded-0">Delete</button>
                             </form>
                         </li>
@@ -37,24 +33,17 @@
                 </div>
             </div>
             <hr />
-            <div class="row">
-                <h2 class="h2 col-auto me-auto">Posts</h2>
-                <div class="col-auto">
-                    <form action="/users/{{user.id}}/posts/new">
-                        <button class="btn btn-primary">Create Post</button>
-                    </form>
-                </div>
+            <div class="row text-end">
+                <small>
+                    {{post.created_at}}
+                </small>
             </div>
-            <div class="row">
-                <ul class="list-unstyled">
-                    {% for post in posts %}
-                    <li class="d-flex justify-content-between">
-                        <a href="/posts/{{post.id}}">{{post.title}}</a>
-                        <span class="float-right">{{post.created_at}}</span>
-                    </li>
-                    {% endfor %}
-                </ul>
-            </div>
+            <blockquote class="blockquote">
+                <p>{{post.content}}</p>
+                <figcaption class="blockquote-footer">
+                    <cite>{{post.user.first_name}} {{post.user.last_name}}</cite>
+                </figcaption>
+            </blockquote>
         </div>
     </div>
 </div>

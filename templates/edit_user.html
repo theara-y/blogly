@@ -1,22 +1,43 @@
 {% extends 'base.html' %}
 {% block body %}
-<h1 class="h1">Edit a user</h1>
-<form action="/users/{{user.id}}/edit" method="POST">
-    <div class="form-floating mb-3">
-        <input value={{user.first_name}} type="text" class="form-control" id="first_name" name="first_name" placeholder="first_name">
-        <label for="first_name">First Name</label>
+<div class="container">
+    <div class="row text-center">
+        <h1 class="h1">Edit a user</h1>
     </div>
-    <div class="form-floating mb-3">
-        <input value={{user.last_name}} type="text" class="form-control" id="last_name" name="last_name" placeholder="last_name">
-        <label for="last_name">Last Name</label>
+    <div class="row">
+        <form action="/users/{{user.id}}/edit" method="POST">
+            <div class="row mb-3">
+                <label class="col-sm-2 col-form-label" for="first_name">First Name</label>
+                <div class="col-sm-10">
+                    <input class="form-control" value={{user.first_name}} type="text" id="first_name" name="first_name"
+                        placeholder="first_name">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-2 col-form-label" for="last_name">Last Name</label>
+                <div class="col-sm-10">
+                    <input class="form-control" value={{user.last_name}} type="text" id="last_name" name="last_name"
+                        placeholder="lastfirst_name">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-2 col-form-label" for="image_url">Image URL</label>
+                <div class="col-sm-10">
+                    <input {% if user.image_url %} value={{user.image_url}} {% endif %} type="text" class="form-control"
+                        id="image_url" name="image_url" placeholder="image_url">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-sm-10 offset-sm-2">
+                    <button class="btn btn-outline-success">Save</button>
+                </div>
+            </div>
+        </form>
+        <form action="/users" class="row justify-content-end">
+            <div class="col-auto">
+                <button class="btn btn-outline-danger">Cancel</button>
+            </div>
+        </form>
     </div>
-    <div class="form-floating mb-3">
-        <input {% if user.image_url %} value={{user.image_url}} {% endif %} type="text" class="form-control" id="image_url" name="image_url" placeholder="image_url">
-        <label for="image_url">Image URL</label>
-    </div>
-    <button class="btn btn-success w-100">Save</button>
-</form>
-<form action="/users" class="d-flex mt-3">
-    <button class="btn btn-outline-danger w-100">Cancel</button>
-</form>
+</div>
 {% endblock %}
