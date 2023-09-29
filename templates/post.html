@@ -44,6 +44,12 @@
                     <cite>{{post.user.first_name}} {{post.user.last_name}}</cite>
                 </figcaption>
             </blockquote>
+            <div class="row">
+                <strong class="col-auto"><i>Tags:</i></strong>
+                {% for tag in tags %}
+                <span class="col-auto badge bg-primary mx-1">{{tag.name}}</span>
+                {% endfor %}
+            </div>
         </div>
     </div>
 </div>

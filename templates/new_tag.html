@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="container">
+    <div class="row text-center">
+        <h1 class="h1">Create a Tag</h1>
+    </div>
+    <form class="row" action="/tags/new" method="POST">
+        <div class="row mb-3">
+            <label class="col-sm-2 col-form-label" for="input_name">Tag</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="input_name" name="input_name" placeholder="Tag Name">
+            </div>
+        </div>
+        <div class="row mb-3 text-center">
+            <div class="col-sm-10 offset-sm-2">
+                <button class="btn btn-success w-100">Add</button>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}

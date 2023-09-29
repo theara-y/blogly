@@ -15,7 +15,7 @@ class PostService:
         user = self.user_service.get_user(user_id)
         return user.posts
 
-    def create_post(self, user_id, title, content):
+    def create_post(self, user_id, title, content, tags):
         if title != '' and content != '':
             post = Post(
                 title=title,
@@ -23,18 +23,24 @@ class PostService:
                 created_at=datetime.now(),
                 user_id=user_id
             )
+            post.tags = []
+            for tag in tags:
+                post.tags.append(tag)
             try:
                 db.session.add(post)
                 db.session.commit()
             except exc.IntegrityError:
                 db.session.rollback()
 
-    def update_post(self, post_id, title, content):
+    def update_post(self, post_id, title, content, tags):
         if title != '' and content != '':
             post = self.get_post(post_id)
             if post:
                 post.title = title
                 post.content = content
+                post.tags = []
+                for tag in tags:
+                    post.tags.append(tag)
             try:
                 db.session.commit()
             except exc.IntegrityError:

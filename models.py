@@ -16,7 +16,7 @@ class User(db.Model):
     __tablename__ = 'users'
 
     def __repr__(self):
-        return f'<User id={self.id} first_name={self.first_name} last_name={self.last_name}>'
+        return f'<User id={self.id} name={self.first_name} {self.last_name}>'
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     first_name = db.Column(db.String, nullable=False)
@@ -29,7 +29,7 @@ class Post(db.Model):
     __tablename__ = 'posts'
 
     def __repr__(self):
-        return f'<Post id={self.id} title={self.title} user_id={self.id}>'
+        return f'<Post id={self.id} user_id={self.id} title={self.title}>'
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     title = db.Column(db.Text, nullable=False)
@@ -39,3 +39,21 @@ class Post(db.Model):
 
     user = db.relationship('User', backref=backref(
         "posts", cascade="all,delete,delete-orphan"))
+    tags = db.relationship('Tag', secondary='post_tags', backref='posts')
+
+
+class Tag(db.Model):
+    __tablename__ = 'tags'
+
+    def __repr__(self):
+        return f'<Tag id={self.id} name={self.name}>'
+
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    name = db.Column(db.Text, unique=True)
+
+
+class PostTag(db.Model):
+    __tablename__ = 'post_tags'
+    post_id = db.Column(db.Integer, db.ForeignKey(
+        'posts.id'), primary_key=True)
+    tag_id = db.Column(db.Integer, db.ForeignKey('tags.id'), primary_key=True)

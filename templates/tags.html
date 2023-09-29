@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}Users{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row mb-3 text-center">
+        <h1 class="h1">Tags</h1>
+    </div>
+    <div class="row mb-3 text-center">
+        <div class="list-group">
+            {% for tag in tags %}
+            <a href="/tags/{{tag.id}}" class="list-group-item list-group-item-action rounded-0">{{tag.name}}</a>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="row mb-3 text-center">
+        <form action="/tags/new" method="GET">
+            <button class="btn btn-outline-primary">Add Tag</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

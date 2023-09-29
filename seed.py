@@ -1,4 +1,4 @@
-from models import db, User, Post
+from models import db, User, Post, Tag
 from app import app
 import datetime
 
@@ -20,11 +20,21 @@ josuke_higashikata = User(first_name='Josuke', last_name='Higashikata',
 giorno_giovanna = User(first_name='Giorno', last_name='Giovanna',
                        image_url='https://static.jojowiki.com/images/thumb/2/21/latest/20210313222135/Giorno_Giovanna_Infobox_Manga.png/600px-Giorno_Giovanna_Infobox_Manga.png')
 
-post1 = Post(title='Post1', content='Hello',
-             created_at=datetime.datetime.now(), user_id=1)
-
 db.session.add_all([jonathan_joestar, joseph_joestar,
                    jotaro_kujo, josuke_higashikata, giorno_giovanna])
 db.session.commit()
-db.session.add(post1)
+
+tag_1 = Tag(name='Funny')
+tag_2 = Tag(name='Cool')
+tag_3 = Tag(name='JOJO')
+
+db.session.add_all([tag_1, tag_2, tag_3])
+db.session.commit()
+
+post_1 = Post(title='To Speedwagon', content='I''m fighting to protect my family from those that wish it harm, I doubt very much that your resolve is equal to mine.',
+              created_at=datetime.datetime.now(), user_id=1, tags=[tag_1, tag_2, tag_3])
+post_2 = Post(title='To Dio', content='I''LL MAKE YOU CRY LIKE A BABY, DIO!!!',
+              created_at=datetime.datetime.now(), user_id=1, tags=[tag_1, tag_3])
+
+db.session.add_all([post_1, post_2])
 db.session.commit()
